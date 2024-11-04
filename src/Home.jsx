@@ -42,21 +42,33 @@ function Home({ user }) {
   return (
     <div class="max-w-6xl mx-auto h-full">
       <div class="flex justify-between items-center mb-8">
-        <h1 class="text-4xl font-bold text-purple-600">New App</h1>
-        <button
-          class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-          onClick={handleSignOut}
-        >
-          Sign Out
-        </button>
+        <h1 class="text-4xl font-bold text-purple-600 cursor-pointer" onClick={() => navigate('/home')}>
+          New App
+        </h1>
+        <div>
+          <button
+            class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-blue-400 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer mr-4"
+            onClick={() => navigate('/profile')}
+          >
+            Profile
+          </button>
+          <button
+            class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded-full shadow-md focus:outline-none focus:ring-2 focus:ring-red-400 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+            onClick={handleSignOut}
+          >
+            Sign Out
+          </button>
+        </div>
       </div>
       <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
         <div class="col-span-1">
-          <h2 class="text-2xl font-bold mb-4 text-purple-600">Profile</h2>
-          <div class="bg-white p-6 rounded-lg shadow-md">
-            <p class="font-semibold">Email: {user.email}</p>
-            {/* Additional profile information */}
-          </div>
+          <h2 class="text-2xl font-bold mb-4 text-purple-600">Welcome, {user.email}</h2>
+          <button
+            class="w-full px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
+            onClick={() => navigate('/create-event')}
+          >
+            Create New Event
+          </button>
         </div>
         <div class="col-span-1 md:col-span-2">
           <h2 class="text-2xl font-bold mb-4 text-purple-600">Upcoming Events</h2>
@@ -67,13 +79,14 @@ function Home({ user }) {
                 <For each={events()}>
                   {(event) => (
                     <div class="bg-white p-6 rounded-lg shadow-md mb-4">
-                      <p class="font-semibold text-lg text-purple-600 mb-2">{event.name}</p>
+                      <p class="font-semibold text-lg text-purple-600 mb-2">{event.events.name}</p>
                       <p class="text-gray-700">
-                        Category: {event.category}<br />
-                        Venue: {event.venue}<br />
-                        Date: {new Date(event.date).toLocaleString()}
+                        Category: {event.events.category}
+                        <br />
+                        Venue: {event.events.venue}
+                        <br />
+                        Date: {new Date(event.events.date).toLocaleString()}
                       </p>
-                      {/* Additional event details */}
                     </div>
                   )}
                 </For>
@@ -82,12 +95,6 @@ function Home({ user }) {
           >
             <p>Loading events...</p>
           </Show>
-          <button
-            class="mt-4 px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition duration-300 ease-in-out transform hover:scale-105 cursor-pointer"
-            onClick={() => navigate('/create-event')}
-          >
-            Create New Event
-          </button>
         </div>
       </div>
     </div>

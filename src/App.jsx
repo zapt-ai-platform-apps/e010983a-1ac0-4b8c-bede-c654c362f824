@@ -5,6 +5,7 @@ import { ThemeSupa } from '@supabase/auth-ui-shared';
 import { Routes, Route, useNavigate } from '@solidjs/router';
 import Home from './Home';
 import CreateEvent from './CreateEvent';
+import Profile from './Profile';
 
 function App() {
   const [user, setUser] = createSignal(null);
@@ -44,57 +45,40 @@ function App() {
 
   return (
     <div class="min-h-screen bg-gradient-to-br from-purple-100 to-blue-100 p-4 text-gray-800">
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <Show
-              when={currentPage() === 'homePage'}
-              fallback={
-                <div class="flex items-center justify-center h-full">
-                  <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
-                    <h2 class="text-3xl font-bold mb-6 text-center text-purple-600">
-                      Sign in with ZAPT
-                    </h2>
-                    <a
-                      href="https://www.zapt.ai"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      class="text-blue-500 hover:underline mb-6 block text-center"
-                    >
-                      Learn more about ZAPT
-                    </a>
-                    <Auth
-                      supabaseClient={supabase}
-                      appearance={{ theme: ThemeSupa }}
-                      providers={['google', 'facebook', 'apple']}
-                      magicLink={true}
-                      showLinks={false}
-                      view="magic_link"
-                    />
-                  </div>
-                </div>
-              }
-            ></Show>
-          }
-        />
-        <Route
-          path="/home"
-          element={
-            <Show when={user()}>
-              <Home user={user()} />
-            </Show>
-          }
-        />
-        <Route
-          path="/create-event"
-          element={
-            <Show when={user()}>
-              <CreateEvent user={user()} />
-            </Show>
-          }
-        />
-      </Routes>
+      <Show
+        when={currentPage() === 'homePage'}
+        fallback={
+          <div class="flex items-center justify-center h-full">
+            <div class="w-full max-w-md p-8 bg-white rounded-xl shadow-lg">
+              <h2 class="text-3xl font-bold mb-6 text-center text-purple-600">
+                Sign in with ZAPT
+              </h2>
+              <a
+                href="https://www.zapt.ai"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="text-blue-500 hover:underline mb-6 block text-center"
+              >
+                Learn more about ZAPT
+              </a>
+              <Auth
+                supabaseClient={supabase}
+                appearance={{ theme: ThemeSupa }}
+                providers={['google', 'facebook', 'apple']}
+                magicLink={true}
+                showLinks={false}
+                view="magic_link"
+              />
+            </div>
+          </div>
+        }
+      >
+        <Routes>
+          <Route path="/home" element={<Home user={user()} />} />
+          <Route path="/create-event" element={<CreateEvent user={user()} />} />
+          <Route path="/profile" element={<Profile user={user()} />} />
+        </Routes>
+      </Show>
     </div>
   );
 }

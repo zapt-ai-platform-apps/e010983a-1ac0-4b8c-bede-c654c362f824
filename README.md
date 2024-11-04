@@ -2,13 +2,13 @@
 
 ## Overview
 
-New App is a Social Dining & Lifestyle Platform that enhances group experiences by combining social networking, event planning, real-time coordination, and automated bill splitting. It caters to both users and partners (restaurants, entertainment venues, etc.), simplifying event coordination, reservations, payments, and creating lasting memories through shared photos and videos.
+New App is a Social Dining & Lifestyle Platform that enhances group experiences by combining social networking, event planning, real-time coordination, and automated bill splitting. It caters to both users and partner venues (restaurants, entertainment venues, etc.), simplifying event coordination, reservations, payments, and creating lasting memories through shared photos and videos.
 
 ## User Journeys
 
 ### 1. User Registration and Profile Setup
 
-1. **Sign Up**: Users can register using their phone number or link social media accounts (Facebook, Instagram).
+1. **Sign Up**: Users can register using their phone number or link social media accounts (Google, Facebook, Apple).
 2. **Add Friends**: Import contacts from phone, Facebook, Instagram, or WhatsApp to connect with friends already on the app.
 3. **Set Preferences**:
    - **Dietary Preferences**: Indicate preferences like vegetarian or non-vegetarian.
@@ -58,9 +58,11 @@ New App is a Social Dining & Lifestyle Platform that enhances group experiences 
 
 ## External APIs and Services Used
 
-- **Supabase**: Used for user authentication and real-time database functionalities.
-- **Location Services API**: For real-time location tracking of users during events.
+- **Supabase**: Used for user authentication.
+- **Google Maps API**: For real-time location tracking of users during events.
 - **Payment Gateway API**: Securely process payments and manage user wallets.
+- **Sentry**: For error logging and monitoring.
+- **Progressier**: Adds PWA support to the app.
 
 ## Notes
 

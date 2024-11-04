@@ -1,6 +1,6 @@
 import { authenticateUser } from './_apiUtils.js';
 import * as Sentry from '@sentry/node';
-import { events } from '../drizzle/schema.js';
+import { events, eventParticipants } from '../drizzle/schema.js';
 import { neon } from '@neondatabase/serverless';
 import { drizzle } from 'drizzle-orm/neon-http';
 
@@ -23,7 +23,7 @@ export default async function handler(req, res) {
     }
 
     const user = await authenticateUser(req);
-    const { name, category, venue, date } = req.body;
+    const { name, category, venue, date, invitedFriends } = req.body;
 
     if (!name || !category || !venue || !date) {
       return res.status(400).json({ error: 'Missing required event details' });
@@ -32,13 +32,25 @@ export default async function handler(req, res) {
     const sql = neon(process.env.NEON_DB_URL);
     const db = drizzle(sql);
 
-    const [newEvent] = await db.insert(events).values({
-      name,
-      category,
-      venue,
-      date: new Date(date),
-      hostId: user.id,
-    }).returning();
+    const [newEvent] = await db
+      .insert(events)
+      .values({
+        name,
+        category,
+        venue,
+        date: new Date(date),
+        hostId: user.id,
+      })
+      .returning();
+
+    if (invitedFriends && invitedFriends.length > 0) {
+      const participants = invitedFriends.map((friendId) => ({
+        eventId: newEvent.id,
+        userId: friendId,
+        confirmed: 'pending',
+      }));
+      await db.insert(eventParticipants).values(participants);
+    }
 
     res.status(201).json({ message: 'Event created successfully', event: newEvent });
   } catch (error) {

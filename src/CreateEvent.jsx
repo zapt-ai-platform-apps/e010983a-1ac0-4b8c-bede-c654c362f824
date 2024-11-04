@@ -1,4 +1,4 @@
-import { createSignal } from 'solid-js';
+import { createSignal, For } from 'solid-js';
 import { useNavigate } from '@solidjs/router';
 import { supabase } from './supabaseClient';
 
@@ -8,11 +8,36 @@ function CreateEvent({ user }) {
     category: '',
     venue: '',
     date: '',
+    invitedFriends: [],
   });
+  const [friends, setFriends] = createSignal([]);
   const [loading, setLoading] = createSignal(false);
   const navigate = useNavigate();
 
   const categories = ['Food', 'Entertainment', 'Ride Share', 'Shopping'];
+
+  const fetchFriends = async () => {
+    try {
+      const { data: { session } } = await supabase.auth.getSession();
+
+      // Fetch user's friends from the backend (Assuming an API endpoint exists)
+      const response = await fetch('/api/getFriends', {
+        headers: {
+          'Authorization': `Bearer ${session.access_token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setFriends(data.friends);
+      } else {
+        console.error('Error fetching friends');
+      }
+    } catch (error) {
+      console.error('Error fetching friends:', error);
+    }
+  };
 
   const handleCreateEvent = async (e) => {
     e.preventDefault();
@@ -42,6 +67,20 @@ function CreateEvent({ user }) {
       setLoading(false);
     }
   };
+
+  const toggleFriendSelection = (friendId) => {
+    let invited = eventData().invitedFriends.slice();
+    if (invited.includes(friendId)) {
+      invited = invited.filter((id) => id !== friendId);
+    } else {
+      invited.push(friendId);
+    }
+    setEventData({ ...eventData(), invitedFriends: invited });
+  };
+
+  onMount(() => {
+    fetchFriends();
+  });
 
   return (
     <div class="max-w-md mx-auto h-full">
@@ -92,6 +131,24 @@ function CreateEvent({ user }) {
             class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-400 focus:border-transparent box-border"
             required
           />
+        </div>
+        <div>
+          <label class="block text-gray-700 font-semibold mb-2">Invite Friends</label>
+          <div class="max-h-32 overflow-y-auto">
+            <For each={friends()}>
+              {(friend) => (
+                <div class="flex items-center">
+                  <input
+                    type="checkbox"
+                    checked={eventData().invitedFriends.includes(friend.id)}
+                    onChange={() => toggleFriendSelection(friend.id)}
+                    class="mr-2 cursor-pointer"
+                  />
+                  <span>{friend.name}</span>
+                </div>
+              )}
+            </For>
+          </div>
         </div>
         <button
           type="submit"

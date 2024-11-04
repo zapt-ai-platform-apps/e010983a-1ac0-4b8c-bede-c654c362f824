@@ -16,7 +16,6 @@ Sentry.init({
   },
 });
 
-// Add PWA support to the app
 window.progressierAppRuntimeSettings = {
   uid: import.meta.env.VITE_PUBLIC_APP_ID,
   icon512:
