@@ -2,7 +2,7 @@
 
 ## Overview
 
-New App is a Social Dining & Lifestyle Platform that enhances group dining experiences by combining social networking, event planning, real-time coordination, and automated bill splitting. It caters to both users and restaurant partners, simplifying event coordination, reservations, payments, and creating lasting memories through shared photos and videos.
+New App is a Social Dining & Lifestyle Platform that enhances group experiences by combining social networking, event planning, real-time coordination, and automated bill splitting. It caters to both users and partners (restaurants, entertainment venues, etc.), simplifying event coordination, reservations, payments, and creating lasting memories through shared photos and videos.
 
 ## User Journeys
 
@@ -18,8 +18,10 @@ New App is a Social Dining & Lifestyle Platform that enhances group dining exper
 
 ### 2. Planning and Reserving an Event
 
-1. **Create an Event**: Select a partner restaurant within the app.
-2. **Reserve a Table**: Choose date, time, and number of guests; a unique Event ID is generated.
+1. **Create an Event**:
+   - **Select Category**: Choose the event category from Food, Entertainment, Ride Share, Shopping, etc.
+   - **Select Partner Venue**: Choose a partner restaurant, entertainment venue, etc., within the app.
+2. **Reserve Details**: Choose date, time, and number of guests; a unique Event ID is generated.
 3. **Invite Friends**: Select friends to invite; they receive notifications to confirm or decline.
 4. **Customize Event**: Optionally add a custom menu, share posts, photos, and videos related to the event.
 
@@ -31,10 +33,10 @@ New App is a Social Dining & Lifestyle Platform that enhances group dining exper
 
 ### 4. Automated Bill Splitting and Payment Processing
 
-1. **Bill Generation**: At meal's end, the restaurant issues a digital bill viewable in-app.
+1. **Bill Generation**: At event's end, the partner venue issues a digital bill viewable in-app.
 2. **Automatic Splitting**:
-   - **By Dietary Preference**: Costs for vegetarian and non-vegetarian items are split based on user preferences.
-   - **Alcohol Consumption**: Alcohol costs are shared only among users who consume alcohol.
+   - **By Preferences**: Costs are split based on users' dietary and alcohol preferences.
+   - **Category-Based Splitting**: For categories like Ride Share or Shopping, splitting is adjusted accordingly.
 3. **Adjustments for No-Shows**: If confirmed attendees don't show up, the bill is recalculated among present members.
 4. **Payment Processing**:
    - **Auto-Deduction**: Each user's share is deducted from their in-app wallet.
@@ -47,10 +49,10 @@ New App is a Social Dining & Lifestyle Platform that enhances group dining exper
 2. **Tagging Friends**: Tag friends in posts, which appear in their timelines.
 3. **External Sharing**: Option to share select memories on external social media platforms.
 
-### 6. Restaurant Interaction (For Partners)
+### 6. Partner Interaction (For Restaurants, Venues)
 
-1. **Dashboard Access**: Restaurants can log in to view reservations and Event IDs.
-2. **Menu Uploads**: Upload event-specific menus or promotions.
+1. **Dashboard Access**: Partners can log in to view reservations and Event IDs.
+2. **Menu/Offer Uploads**: Upload event-specific menus, promotions, or offers.
 3. **Confirm Reservations**: Manage and confirm upcoming reservations.
 4. **Payment Confirmation**: Receive immediate payment summaries post-event.
 
@@ -64,4 +66,4 @@ New App is a Social Dining & Lifestyle Platform that enhances group dining exper
 
 - **Privacy Focused**: Users have full control over their data sharing and privacy settings.
 - **Seamless Experience**: The app eliminates the hassle of coordinating events and splitting bills manually.
-- **Interactive Platform**: Enhances social interactions and creates lasting memories tied to each dining experience.
+- **Interactive Platform**: Enhances social interactions and creates lasting memories tied to each experience.

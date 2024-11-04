@@ -11,7 +11,8 @@ export const users = pgTable('users', {
 export const events = pgTable('events', {
   id: serial('id').primaryKey(),
   name: text('name').notNull(),
-  restaurant: text('restaurant').notNull(),
+  category: text('category').notNull(),
+  venue: text('venue').notNull(),
   date: timestamp('date').notNull(),
   hostId: uuid('host_id').notNull(),
   createdAt: timestamp('created_at').defaultNow(),
